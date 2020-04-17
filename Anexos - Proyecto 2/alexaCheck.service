@@ -1,0 +1,17 @@
+[Unit]
+Description=Corre el servicio de reinicio de Alexa en caso de fallas
+Wants=network.target network-online.target sound.target AlexaPi.service
+After=network.target network-online.target sound.target AlexaPi.service
+ 
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/pi/Documents/Proyecto2/checkScript.py
+User=pi
+WorkingDirectory=/home/pi
+Restart=on-failure
+RestartSec=5s
+StandardOutput=syslog
+StandardError=syslog
+ 
+[Install]
+WantedBy=default.target

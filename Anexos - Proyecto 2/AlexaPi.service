@@ -1,0 +1,24 @@
+[Unit]
+Description=Alexa client for all your devices
+Documentation=https://github.com/alexa-pi/AlexaPi/wiki
+
+Wants=network.target network-online.target
+Requires=sound.target
+After=network.target network-online.target sound.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /opt/AlexaPi/src/main.py -d
+
+User=alexapi
+Group=alexapi
+
+ProtectHome=true
+RuntimeDirectory=AlexaPi
+RuntimeDirectoryMode=0770
+WorkingDirectory=/run/AlexaPi
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=defaul.target
